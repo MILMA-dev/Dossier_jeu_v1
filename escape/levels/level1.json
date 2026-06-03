@@ -1,0 +1,95 @@
+{
+    "id": 1,
+    "name": "La Cellule Oubliée",
+    "description": "Vous vous réveillez dans une prison sombre et humide. Trouvez un moyen de sortir.",
+    "time_limit": 600,
+    "nodes": {
+        "node_start": {
+            "background": "assets/img/level1/cell_center.jpg",
+            "connections": {
+                "north": "node_desk",
+                "east": "node_bed",
+                "west": "node_door"
+            },
+            "objects": []
+        },
+        "node_desk": {
+            "background": "assets/img/level1/cell_desk.jpg",
+            "connections": {
+                "south": "node_start"
+            },
+            "objects": [
+                {
+                    "id": "book_clue",
+                    "type": "examine",
+                    "x": 45, "y": 60, "w": 10, "h": 10,
+                    "dialog": "Un vieux livre poussiéreux. Une note est glissée à l'intérieur : 'Le code est l'année de la révolte : 1789'"
+                },
+                {
+                    "id": "locked_box",
+                    "type": "puzzle",
+                    "x": 20, "y": 70, "w": 15, "h": 15,
+                    "puzzle_id": "box_code",
+                    "puzzle_type": "code_4digits",
+                    "solution": "1789"
+                }
+            ]
+        },
+        "node_bed": {
+            "background": "assets/img/level1/cell_bed.jpg",
+            "connections": {
+                "west": "node_start"
+            },
+            "objects": [
+                {
+                    "id": "pillow",
+                    "type": "examine",
+                    "x": 30, "y": 50, "w": 20, "h": 20,
+                    "dialog": "Rien sous l'oreiller, à part de la moisissure."
+                },
+                {
+                    "id": "hidden_lock",
+                    "type": "puzzle",
+                    "x": 70, "y": 80, "w": 10, "h": 10,
+                    "puzzle_id": "floor_lock",
+                    "puzzle_type": "combination_lock",
+                    "solution": "314"
+                }
+            ]
+        },
+        "node_door": {
+            "background": "assets/img/level1/cell_door.jpg",
+            "connections": {
+                "east": "node_start"
+            },
+            "objects": [
+                {
+                    "id": "main_door",
+                    "type": "exit",
+                    "x": 40, "y": 20, "w": 20, "h": 60,
+                    "require_item": "cell_key"
+                }
+            ]
+        }
+    },
+    "puzzles": {
+        "box_code": {
+            "type": "code_4digits",
+            "solution": "1789",
+            "reward_item": {
+                "id": "small_key",
+                "name": "Petite clé",
+                "icon": "assets/img/items/key.png"
+            }
+        },
+        "floor_lock": {
+            "type": "combination_lock",
+            "solution": "314",
+            "reward_item": {
+                "id": "cell_key",
+                "name": "Clé de la cellule",
+                "icon": "assets/img/items/main_key.png"
+            }
+        }
+    }
+}

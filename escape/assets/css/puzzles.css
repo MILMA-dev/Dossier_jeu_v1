@@ -1,0 +1,107 @@
+/* puzzles.css */
+#puzzle-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#puzzle-modal.active {
+    display: flex;
+}
+
+.puzzle-container {
+    background: #222;
+    padding: 20px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Keypad 4 Digits */
+.keypad-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    background: #000;
+    padding: 10px;
+    border: 1px solid #0f0;
+    color: #0f0;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.keypad-grid button {
+    padding: 15px;
+    font-size: 1.2rem;
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    cursor: pointer;
+}
+
+.keypad-grid button:hover {
+    background: #444;
+}
+
+/* Combination Lock */
+.combination-lock {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    perspective: 500px;
+}
+
+.lock-wheel {
+    width: 60px;
+    height: 80px;
+    background: #444;
+    border: 2px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+}
+
+/* Wire Connect */
+.wire-svg {
+    width: 100%;
+    height: 300px;
+    background: #111;
+}
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.2s ease-in-out 2;
+    border-color: red !important;
+    color: red !important;
+}
+
+.success {
+    border-color: #0f0 !important;
+    color: #0f0 !important;
+    box-shadow: 0 0 15px #0f0;
+}

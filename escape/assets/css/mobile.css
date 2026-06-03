@@ -1,0 +1,25 @@
+/* mobile.css */
+@media (max-width: 768px) {
+    #app-layout {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    #sidebar-nav {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    #sidebar-nav li {
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    #dashboard-content {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,87 @@
+/* landing.css */
+.landing-page {
+    background: url('../img/landing-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, var(--bg-dark) 100%);
+}
+
+.auth-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo-escape {
+    font-size: 4rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--primary-color);
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--text-dim);
+    margin-bottom: 30px;
+}
+
+.auth-box {
+    background: rgba(20, 20, 20, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    padding: 10px;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; color: var(--text-dim); }
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    border: 1px solid #444;
+    color: white;
+}
+
+.avatar-picker {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5rem;
+}
+
+.message { margin-top: 15px; text-align: center; font-size: 0.9rem; }
+.message.error { color: var(--accent-red); }
+.message.success { color: var(--primary-color); }

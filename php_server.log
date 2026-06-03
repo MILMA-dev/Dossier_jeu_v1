@@ -1,0 +1,16 @@
+[Wed Jun  3 15:26:37 2026] PHP 8.3.6 Development Server (http://localhost:8080) started
+[Wed Jun  3 15:27:28 2026] [::1]:38978 Accepted
+[Wed Jun  3 15:27:28 2026] [::1]:38978 [200]: GET /index.php
+[Wed Jun  3 15:27:28 2026] [::1]:38978 Closing
+[Wed Jun  3 15:27:29 2026] [::1]:38982 Accepted
+[Wed Jun  3 15:27:29 2026] [::1]:38986 Accepted
+[Wed Jun  3 15:27:29 2026] [::1]:38982 [200]: GET /assets/css/main.css
+[Wed Jun  3 15:27:29 2026] [::1]:38986 [200]: GET /assets/css/landing.css
+[Wed Jun  3 15:27:29 2026] [::1]:38982 Closing
+[Wed Jun  3 15:27:29 2026] [::1]:38986 Closing
+[Wed Jun  3 15:27:29 2026] [::1]:39000 Accepted
+[Wed Jun  3 15:27:29 2026] [::1]:39000 [404]: GET /assets/img/landing-bg.jpg - No such file or directory
+[Wed Jun  3 15:27:29 2026] [::1]:39000 Closing
+[Wed Jun  3 15:27:31 2026] [::1]:39012 Accepted
+[Wed Jun  3 15:27:31 2026] [::1]:39012 [200]: POST /api/auth.php
+[Wed Jun  3 15:27:31 2026] [::1]:39012 Closing

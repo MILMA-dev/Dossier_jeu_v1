@@ -1,0 +1,68 @@
+/* main.css */
+:root {
+    --primary-color: #00ffcc;
+    --bg-dark: #0a0a0a;
+    --bg-panel: #1a1a1a;
+    --text-main: #e0e0e0;
+    --text-dim: #a0a0a0;
+    --accent-red: #ff3366;
+    --font-ui: 'Orbitron', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .logo-escape {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: black;
+    border: none;
+    padding: 12px 24px;
+    font-family: var(--font-ui);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 15px var(--primary-color);
+    transform: translateY(-2px);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--bg-panel);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+th { color: var(--primary-color); font-family: var(--font-ui); }
+
+/* Placeholder for missing images */
+.scene-3d {
+    background: #111 linear-gradient(45deg, #111 25%, #222 25%, #222 50%, #111 50%, #111 75%, #222 75%, #222 100%);
+    background-size: 100px 100px;
+}
+.interactive-object {
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px dashed var(--primary-color);
+}
