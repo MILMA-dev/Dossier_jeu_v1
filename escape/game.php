@@ -26,7 +26,7 @@ $level_id = $_GET['level'] ?? 1;
                 <div id="game-timer">00:00</div>
             </div>
             <div class="hud-right">
-                <button id="btn-pause">⏸</button>
+                <button class="btn-settings-toggle" onclick="window.game.toggleSettings()">⚙️</button>
             </div>
         </header>
 
@@ -44,6 +44,14 @@ $level_id = $_GET['level'] ?? 1;
         <div id="dialog-overlay">
             <p id="dialog-text"></p>
         </div>
+
+        <div id="settings-menu">
+            <h2>OPTIONS</h2>
+            <button class="btn-primary" onclick="window.game.toggleSettings()">Reprendre</button>
+            <button class="btn-primary" onclick="window.game.saveState()">Sauvegarder</button>
+            <button class="btn-primary" style="background: var(--error-color)" onclick="window.location.href='dashboard.php'">Quitter</button>
+        </div>
+        <div class="settings-overlay" onclick="window.game.toggleSettings()"></div>
 
         <div id="puzzle-modal">
             <div class="puzzle-container">
@@ -79,8 +87,9 @@ $level_id = $_GET['level'] ?? 1;
                 this.dialog = new DialogEngine();
                 this.audio = new AudioEngine();
                 this.timer = null;
+                this.isPaused = false;
 
-                window.game = this; // Global access for event handlers
+                window.game = this; // Global access
                 this.init();
             }
 
@@ -97,10 +106,25 @@ $level_id = $_GET['level'] ?? 1;
                     this.engine.loadLevel(this.levelData);
                 } catch (err) {
                     console.error("Failed to load level:", err);
+                    this.dialog.show("Erreur de chargement du niveau.");
+                }
+            }
+
+            toggleSettings() {
+                this.isPaused = !this.isPaused;
+                document.getElementById('settings-menu').classList.toggle('open');
+                document.querySelector('.settings-overlay').classList.toggle('active');
+
+                if (this.isPaused) {
+                    this.timer.stop();
+                } else {
+                    this.timer.start();
                 }
             }
 
             handleObjectInteraction(obj) {
+                if (this.isPaused) return;
+
                 if (obj.type === 'examine') {
                     this.dialog.show(obj.dialog);
                 } else if (obj.type === 'puzzle') {
@@ -117,7 +141,7 @@ $level_id = $_GET['level'] ?? 1;
                     }
                 } else if (obj.type === 'exit') {
                     if (obj.require_item && !this.inventory.hasItem(obj.require_item)) {
-                        this.dialog.show("Il vous faut une clé.");
+                        this.dialog.show("Il vous faut : " + obj.require_item);
                     } else {
                         this.completeLevel();
                     }
@@ -128,10 +152,10 @@ $level_id = $_GET['level'] ?? 1;
                 this.state.puzzle_states[puzzleId] = true;
                 this.dialog.show("Puzzle résolu !");
 
-                // Check if there's a reward item in level JSON
                 if (this.levelData.puzzles && this.levelData.puzzles[puzzleId] && this.levelData.puzzles[puzzleId].reward_item) {
                     this.inventory.addItem(this.levelData.puzzles[puzzleId].reward_item);
                 }
+                this.saveState();
             }
 
             onNodeChanged(nodeId) {
@@ -148,12 +172,15 @@ $level_id = $_GET['level'] ?? 1;
                 formData.append('puzzle_states', JSON.stringify(this.state.puzzle_states));
                 formData.append('time_elapsed', this.timer.getTimeElapsed());
 
-                await fetch('api/game_state.php', { method: 'POST', body: formData });
+                try {
+                    await fetch('api/game_state.php', { method: 'POST', body: formData });
+                    if (this.isPaused) this.dialog.show("Progression sauvegardée.");
+                } catch(e) {}
             }
 
             async completeLevel() {
                 this.timer.stop();
-                const score = 1000 - (this.timer.getTimeElapsed() * 2);
+                const score = Math.max(0, 1000 - (this.timer.getTimeElapsed() * 2));
 
                 const formData = new FormData();
                 formData.append('action', 'complete');

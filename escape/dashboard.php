@@ -17,7 +17,13 @@ $user = $stmt->fetch();
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="dark-theme">
+<button id="menu-toggle" onclick="toggleSidebar()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</button>
+
 <div id="app-layout">
   <!-- SIDEBAR -->
   <nav id="sidebar">
@@ -34,6 +40,8 @@ $user = $stmt->fetch();
       <li data-page="play">🎮 Jouer</li>
       <li data-page="leaderboard">🏆 Classement</li>
       <li data-page="stats">📊 Statistiques</li>
+      <li data-page="profile">👤 Profil</li>
+      <li onclick="toggleTheme()">🌓 Thème</li>
       <?php if (is_admin()): ?>
         <li onclick="window.location.href='admin/index.php'">🛠 Admin</li>
       <?php endif; ?>
@@ -69,10 +77,50 @@ $user = $stmt->fetch();
             <!-- Loading via JS -->
         </div>
     </section>
+
+    <section id="profile-page" class="page">
+        <h1>Votre Profil</h1>
+        <form id="profile-form" class="welcome-card" style="max-width: 500px;">
+            <div class="form-group">
+                <label>Nom d'utilisateur</label>
+                <input type="text" name="username" value="<?= h($user['username']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="<?= h($user['email']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Noueau mot de passe (laisser vide si inchangé)</label>
+                <input type="password" name="password">
+            </div>
+            <div class="form-group">
+                <label>Avatar</label>
+                <div class="avatar-picker">
+                    <?php foreach(['🧙','🕵️','👨‍🚀','🤖','🧟'] as $a): ?>
+                        <label>
+                            <input type="radio" name="avatar" value="<?= $a ?>" <?= $user['avatar'] == $a ? 'checked' : '' ?>>
+                            <span><?= $a ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+            <div id="profile-msg" style="margin-top: 10px;"></div>
+        </form>
+    </section>
   </main>
 </div>
 
 <script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        document.body.classList.toggle('dark-theme');
+    }
+
     function navigateTo(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('#sidebar-nav li').forEach(l => l.classList.remove('active'));
@@ -87,7 +135,29 @@ $user = $stmt->fetch();
     }
 
     document.querySelectorAll('#sidebar-nav li[data-page]').forEach(li => {
-        li.addEventListener('click', () => navigateTo(li.dataset.page));
+        li.addEventListener('click', () => {
+            navigateTo(li.dataset.page);
+            if (window.innerWidth <= 768) toggleSidebar();
+        });
+    });
+
+    document.getElementById('profile-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const msg = document.getElementById('profile-msg');
+
+        try {
+            const response = await fetch('api/update_profile.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            msg.textContent = result.message;
+            msg.style.color = result.success ? 'var(--primary-color)' : 'var(--error-color)';
+            if (result.success) setTimeout(() => window.location.reload(), 1500);
+        } catch (err) {
+            msg.textContent = "Erreur de connexion";
+        }
     });
 
     async function loadLeaderboard() {

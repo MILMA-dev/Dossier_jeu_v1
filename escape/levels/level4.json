@@ -3,11 +3,20 @@
     "name": "Station Orion-7",
     "description": "L'oxygène baisse. Le terminal de contrôle est votre seul espoir.",
     "time_limit": 1200,
+    "puzzles": {
+        "nav_computer": { "type": "cipher", "solution": "ORION", "reward_item": { "id": "chip", "name": "Puce de sécurité" } }
+    },
     "nodes": {
         "node_start": {
             "background": "assets/img/level4/hub.jpg",
-            "connections": {"north": "node_cockpit", "down": "node_engine"},
-            "objects": []
+            "connections": {"north": "node_cockpit"},
+            "objects": [
+                {
+                    "type": "exit",
+                    "x": 45, "y": 45, "w": 10, "h": 10,
+                    "require_item": "chip"
+                }
+            ]
         },
         "node_cockpit": {
             "background": "assets/img/level4/cockpit.jpg",

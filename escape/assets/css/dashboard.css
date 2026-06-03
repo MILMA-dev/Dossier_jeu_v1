@@ -6,16 +6,18 @@
 
 #sidebar {
     width: 260px;
-    background: #111;
-    border-right: 1px solid #333;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
 
 #sidebar-logo {
     padding: 30px;
     text-align: center;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid var(--border-color);
 }
 
 #sidebar-user {
@@ -36,26 +38,76 @@
 #sidebar-nav li {
     padding: 15px 30px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s;
     color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 #sidebar-nav li:hover, #sidebar-nav li.active {
-    background: #222;
+    background: rgba(0, 255, 204, 0.1);
     color: var(--primary-color);
 }
 
 #sidebar-logout {
     padding: 20px;
     text-decoration: none;
-    color: var(--accent-red);
-    border-top: 1px solid #222;
+    color: var(--error-color);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 #dashboard-content {
     flex: 1;
     padding: 40px;
     overflow-y: auto;
+    background: var(--bg-dark);
+}
+
+/* Hamburger Menu */
+#menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    #menu-toggle { display: block; }
+
+    #sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        transform: translateX(-100%);
+    }
+
+    #sidebar.open {
+        transform: translateX(0);
+    }
+
+    #dashboard-content {
+        padding: 80px 20px 20px 20px;
+    }
 }
 
 .page { display: none; }
@@ -66,6 +118,7 @@
     padding: 40px;
     border-radius: 12px;
     margin-top: 20px;
+    border: 1px solid var(--border-color);
 }
 
 .level-grid {
@@ -76,10 +129,17 @@
 }
 
 .level-card {
-    background: #222;
+    background: var(--bg-panel);
     padding: 20px;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     text-align: center;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.level-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
 }
 
 .btn-play {
@@ -89,6 +149,8 @@
     color: var(--primary-color);
     padding: 8px 16px;
     cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
 }
 
 .btn-play:hover {

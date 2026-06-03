@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     background: black;
+    position: relative;
+    overflow: hidden;
 }
 
 #game-hud {
@@ -25,7 +27,7 @@
 }
 
 .timer-urgent {
-    color: var(--accent-red) !important;
+    color: var(--error-color) !important;
     animation: pulse 1s infinite;
 }
 
@@ -39,6 +41,7 @@
     flex: 1;
     position: relative;
     overflow: hidden;
+    background-color: #000;
 }
 
 .scene-3d {
@@ -46,7 +49,12 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: filter 0.5s;
+    transition: filter 0.5s, opacity 0.5s;
+    opacity: 0;
+}
+
+.scene-3d.fade-in {
+    opacity: 1;
 }
 
 .nav-arrow {
@@ -61,7 +69,15 @@
     font-size: 2rem;
     cursor: pointer;
     border-radius: 50%;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    z-index: 50;
+    border: 1px solid var(--primary-color);
+}
+
+.nav-arrow:hover {
+    background: var(--primary-color);
+    color: black;
+    transform: scale(1.1) translate(-50%, -50%);
 }
 
 .arrow-north { top: 20px; left: 50%; transform: translateX(-50%); }
@@ -72,11 +88,12 @@
 .interactive-object {
     position: absolute;
     cursor: pointer;
-    /* border: 1px dashed rgba(0,255,204,0.3); */
+    transition: box-shadow 0.3s;
+    z-index: 40;
 }
 
 .interactive-object:hover {
-    box-shadow: inset 0 0 10px var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
 }
 
 #game-footer {
@@ -84,11 +101,13 @@
     background: #111;
     border-top: 1px solid #333;
     padding: 10px;
+    z-index: 100;
 }
 
 #inventory-slots {
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .inventory-slot {
@@ -99,11 +118,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
+    transition: all 0.3s;
 }
 
 .inventory-slot.selected {
     border-color: var(--primary-color);
     box-shadow: 0 0 10px var(--primary-color);
+    background: rgba(0, 255, 204, 0.1);
 }
 
 #dialog-overlay {
@@ -111,11 +133,59 @@
     bottom: 120px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.9);
     padding: 20px;
     border: 1px solid var(--primary-color);
+    border-radius: 8px;
     max-width: 80%;
     display: none;
+    z-index: 200;
+    color: white;
+    font-family: var(--font-body);
 }
 
 #dialog-overlay.active { display: block; }
+
+/* Settings Menu */
+#settings-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: var(--bg-sidebar);
+    border-left: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#settings-menu.open {
+    right: 0;
+}
+
+.settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+}
+
+.settings-overlay.active {
+    display: block;
+}
+
+.btn-settings-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}

@@ -14,3 +14,18 @@
 [Wed Jun  3 15:27:31 2026] [::1]:39012 Accepted
 [Wed Jun  3 15:27:31 2026] [::1]:39012 [200]: POST /api/auth.php
 [Wed Jun  3 15:27:31 2026] [::1]:39012 Closing
+[Wed Jun  3 16:46:23 2026] [::1]:43852 Accepted
+[Wed Jun  3 16:46:23 2026] [::1]:43852 [200]: GET /index.php
+[Wed Jun  3 16:46:23 2026] [::1]:43852 Closing
+[Wed Jun  3 16:46:23 2026] [::1]:43854 Accepted
+[Wed Jun  3 16:46:23 2026] [::1]:43862 Accepted
+[Wed Jun  3 16:46:23 2026] [::1]:43854 [200]: GET /assets/css/main.css
+[Wed Jun  3 16:46:23 2026] [::1]:43862 [200]: GET /assets/css/landing.css
+[Wed Jun  3 16:46:23 2026] [::1]:43854 Closing
+[Wed Jun  3 16:46:23 2026] [::1]:43862 Closing
+[Wed Jun  3 16:46:23 2026] [::1]:43866 Accepted
+[Wed Jun  3 16:46:23 2026] [::1]:43866 [404]: GET /assets/img/landing-bg.jpg - No such file or directory
+[Wed Jun  3 16:46:23 2026] [::1]:43866 Closing
+[Wed Jun  3 16:46:24 2026] [::1]:58614 Accepted
+[Wed Jun  3 16:46:24 2026] [::1]:58614 [200]: POST /api/auth.php
+[Wed Jun  3 16:46:24 2026] [::1]:58614 Closing

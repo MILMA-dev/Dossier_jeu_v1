@@ -3,7 +3,7 @@ RewriteEngine On
 # Secure includes
 RewriteRule ^includes/.*$ - [F,L]
 RewriteRule ^sql/.*$ - [F,L]
-RewriteRule ^levels/.*\.json$ - [F,L]
 
-# Redirect some common paths if needed (optional)
-# RewriteRule ^login$ index.php [L]
+# Allow levels to be read by JS but keep them protected if needed.
+# For now, let's just allow them so the game works.
+# RewriteRule ^levels/.*\.json$ - [F,L]

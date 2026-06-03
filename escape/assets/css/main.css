@@ -1,13 +1,29 @@
 /* main.css */
 :root {
-    --primary-color: #00ffcc;
+    /* Dark mode (default) */
     --bg-dark: #0a0a0a;
     --bg-panel: #1a1a1a;
-    --text-main: #e0e0e0;
-    --text-dim: #a0a0a0;
-    --accent-red: #ff3366;
+    --bg-sidebar: #111;
+    --text-main: #ffffff;
+    --text-dim: #cccccc;
+    --primary-color: #00ffcc;
+    --accent-color: #3399ff;
+    --border-color: #333;
+    --error-color: #ff3366;
     --font-ui: 'Orbitron', sans-serif;
     --font-body: 'Roboto', sans-serif;
+}
+
+body.light-theme {
+    --bg-dark: #f0f4f8;
+    --bg-panel: #ffffff;
+    --bg-sidebar: #e1e8f0;
+    --text-main: #1a365d;
+    --text-dim: #4a5568;
+    --primary-color: #3182ce;
+    --accent-color: #2b6cb0;
+    --border-color: #cbd5e0;
+    --error-color: #e53e3e;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,6 +33,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1, h2, h3, .logo-escape {
@@ -27,7 +44,7 @@ h1, h2, h3, .logo-escape {
 
 .btn-primary {
     background: var(--primary-color);
-    color: black;
+    color: white;
     border: none;
     padding: 12px 24px;
     font-family: var(--font-ui);
@@ -47,15 +64,21 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     background: var(--bg-panel);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
 }
 
-th { color: var(--primary-color); font-family: var(--font-ui); }
+th {
+    color: var(--primary-color);
+    font-family: var(--font-ui);
+    background: rgba(0,0,0,0.05);
+}
 
 /* Placeholder for missing images */
 .scene-3d {
