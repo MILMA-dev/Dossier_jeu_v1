@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Secure includes
+RewriteRule ^includes/.*$ - [F,L]
+RewriteRule ^sql/.*$ - [F,L]
+RewriteRule ^levels/.*\.json$ - [F,L]
+
+# Redirect some common paths if needed (optional)
+# RewriteRule ^login$ index.php [L]

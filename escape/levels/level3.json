@@ -1,0 +1,37 @@
+{
+    "id": 3,
+    "name": "Le Manoir des Ombres",
+    "description": "Un vieux manoir hanté par des souvenirs. Reconstituez le passé.",
+    "time_limit": 900,
+    "nodes": {
+        "node_start": {
+            "background": "assets/img/level3/foyer.jpg",
+            "connections": {"north": "node_study", "east": "node_gallery"},
+            "objects": []
+        },
+        "node_gallery": {
+            "background": "assets/img/level3/gallery.jpg",
+            "connections": {"west": "node_start"},
+            "objects": [
+                {
+                    "type": "puzzle",
+                    "puzzle_id": "painting",
+                    "puzzle_type": "jigsaw",
+                    "x": 20, "y": 20, "w": 40, "h": 40
+                }
+            ]
+        },
+        "node_study": {
+            "background": "assets/img/level3/study.jpg",
+            "connections": {"south": "node_start"},
+            "objects": [
+                {
+                    "type": "puzzle",
+                    "puzzle_id": "piano",
+                    "puzzle_type": "sequence_memory",
+                    "x": 60, "y": 60, "w": 20, "h": 20
+                }
+            ]
+        }
+    }
+}

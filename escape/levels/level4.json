@@ -1,0 +1,26 @@
+{
+    "id": 4,
+    "name": "Station Orion-7",
+    "description": "L'oxygène baisse. Le terminal de contrôle est votre seul espoir.",
+    "time_limit": 1200,
+    "nodes": {
+        "node_start": {
+            "background": "assets/img/level4/hub.jpg",
+            "connections": {"north": "node_cockpit", "down": "node_engine"},
+            "objects": []
+        },
+        "node_cockpit": {
+            "background": "assets/img/level4/cockpit.jpg",
+            "connections": {"south": "node_start"},
+            "objects": [
+                {
+                    "type": "puzzle",
+                    "puzzle_id": "nav_computer",
+                    "puzzle_type": "cipher",
+                    "solution": "ORION",
+                    "x": 40, "y": 40, "w": 20, "h": 20
+                }
+            ]
+        }
+    }
+}

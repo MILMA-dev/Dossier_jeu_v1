@@ -1,0 +1,121 @@
+/* game.css */
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: black;
+}
+
+#game-hud {
+    height: 60px;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #333;
+    z-index: 100;
+}
+
+#game-timer {
+    font-family: var(--font-ui);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.timer-urgent {
+    color: var(--accent-red) !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+#viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.scene-3d {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: filter 0.5s;
+}
+
+.nav-arrow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.arrow-north { top: 20px; left: 50%; transform: translateX(-50%); }
+.arrow-south { bottom: 20px; left: 50%; transform: translateX(-50%); }
+.arrow-west { left: 20px; top: 50%; transform: translateY(-50%); }
+.arrow-east { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.interactive-object {
+    position: absolute;
+    cursor: pointer;
+    /* border: 1px dashed rgba(0,255,204,0.3); */
+}
+
+.interactive-object:hover {
+    box-shadow: inset 0 0 10px var(--primary-color);
+}
+
+#game-footer {
+    height: 100px;
+    background: #111;
+    border-top: 1px solid #333;
+    padding: 10px;
+}
+
+#inventory-slots {
+    display: flex;
+    gap: 10px;
+}
+
+.inventory-slot {
+    width: 80px;
+    height: 80px;
+    background: #222;
+    border: 1px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-slot.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+#dialog-overlay {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    border: 1px solid var(--primary-color);
+    max-width: 80%;
+    display: none;
+}
+
+#dialog-overlay.active { display: block; }

@@ -1,0 +1,38 @@
+{
+    "id": 2,
+    "name": "Le Laboratoire Interdit",
+    "description": "Des alarmes retentissent. Le gaz neurotoxique sera libéré dans 10 minutes.",
+    "time_limit": 600,
+    "nodes": {
+        "node_start": {
+            "background": "assets/img/level2/lab_main.jpg",
+            "connections": {"north": "node_server", "east": "node_chem", "south": "node_exit"},
+            "objects": []
+        },
+        "node_server": {
+            "background": "assets/img/level2/lab_server.jpg",
+            "connections": {"south": "node_start"},
+            "objects": [
+                {
+                    "type": "puzzle",
+                    "puzzle_id": "wires",
+                    "puzzle_type": "wire_connect",
+                    "x": 30, "y": 40, "w": 20, "h": 20
+                }
+            ]
+        },
+        "node_chem": {
+            "background": "assets/img/level2/lab_chem.jpg",
+            "connections": {"west": "node_start"},
+            "objects": [
+                {
+                    "type": "puzzle",
+                    "puzzle_id": "symbols",
+                    "puzzle_type": "pattern_match",
+                    "pattern": "A-B-C",
+                    "x": 50, "y": 50, "w": 15, "h": 15
+                }
+            ]
+        }
+    }
+}
