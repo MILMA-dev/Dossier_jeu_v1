@@ -13,6 +13,9 @@ if ($action === 'login') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password_hash'])) {
+        if (!$user['is_active']) {
+            json_response(['success' => false, 'message' => 'Votre compte est désactivé'], 403);
+        }
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];

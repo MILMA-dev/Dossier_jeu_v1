@@ -31,7 +31,17 @@ $level_id = $_GET['level'] ?? 1;
         </header>
 
         <!-- Main Viewport -->
-        <div id="viewport"></div>
+        <div id="viewport">
+            <!-- Level Info -->
+            <div id="level-info-overlay">
+                <h3 id="info-level-name"></h3>
+                <p id="info-level-summary"></p>
+                <div id="level-objective"></div>
+            </div>
+
+            <!-- Map -->
+            <div id="game-map"></div>
+        </div>
 
         <!-- Inventory Footer -->
         <footer id="game-footer">
@@ -99,6 +109,11 @@ $level_id = $_GET['level'] ?? 1;
                     this.levelData = await response.json();
 
                     document.getElementById('level-name').textContent = this.levelData.name;
+                    document.getElementById('info-level-name').textContent = this.levelData.name;
+                    document.getElementById('info-level-summary').textContent = this.levelData.summary || this.levelData.description;
+                    document.getElementById('level-objective').innerHTML = "🎯 Objectif: " + (this.levelData.objective || "S'échapper");
+
+                    this.renderMap();
 
                     this.timer = new Timer(this.levelData.time_limit, () => this.gameOver());
                     this.timer.start();
@@ -160,7 +175,32 @@ $level_id = $_GET['level'] ?? 1;
 
             onNodeChanged(nodeId) {
                 this.state.current_node = nodeId;
+                this.updateMap();
                 this.saveState();
+            }
+
+            renderMap() {
+                const mapContainer = document.getElementById('game-map');
+                if (!mapContainer || !this.levelData.nodes) return;
+                mapContainer.innerHTML = '';
+
+                Object.entries(this.levelData.nodes).forEach(([id, node]) => {
+                    if (node.map_x !== undefined) {
+                        const dot = document.createElement('div');
+                        dot.className = 'map-node';
+                        dot.id = `map-node-${id}`;
+                        dot.style.left = node.map_x + '%';
+                        dot.style.top = node.map_y + '%';
+                        mapContainer.appendChild(dot);
+                    }
+                });
+                this.updateMap();
+            }
+
+            updateMap() {
+                document.querySelectorAll('.map-node').forEach(n => n.classList.remove('active'));
+                const activeNode = document.getElementById(`map-node-${this.state.current_node}`);
+                if (activeNode) activeNode.classList.add('active');
             }
 
             async saveState() {

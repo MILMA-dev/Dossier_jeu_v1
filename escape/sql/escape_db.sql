@@ -12,6 +12,7 @@ CREATE TABLE users (
   role            ENUM('player','admin') DEFAULT 'player',
   total_points    INT DEFAULT 0,
   total_games     INT DEFAULT 0,
+  is_active       TINYINT(1) DEFAULT 1,
   created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

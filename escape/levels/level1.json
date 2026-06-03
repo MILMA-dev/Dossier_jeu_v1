@@ -1,10 +1,13 @@
 {
     "id": 1,
     "name": "La Cellule Oubliée",
+    "summary": "Prisonnier d'une cellule oubliée, le temps joue contre vous.",
+    "objective": "Trouvez la clé principale pour déverrouiller la porte.",
     "description": "Vous vous réveillez dans une prison sombre et humide. Trouvez un moyen de sortir.",
     "time_limit": 600,
     "nodes": {
         "node_start": {
+            "map_x": 50, "map_y": 50,
             "background": "assets/img/level1/cell_center.jpg",
             "connections": {
                 "north": "node_desk",
@@ -14,6 +17,7 @@
             "objects": []
         },
         "node_desk": {
+            "map_x": 50, "map_y": 20,
             "background": "assets/img/level1/cell_desk.jpg",
             "connections": {
                 "south": "node_start"
@@ -36,6 +40,7 @@
             ]
         },
         "node_bed": {
+            "map_x": 80, "map_y": 50,
             "background": "assets/img/level1/cell_bed.jpg",
             "connections": {
                 "west": "node_start"
@@ -58,6 +63,7 @@
             ]
         },
         "node_door": {
+            "map_x": 20, "map_y": 50,
             "background": "assets/img/level1/cell_door.jpg",
             "connections": {
                 "east": "node_start"
