@@ -4,7 +4,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: black;
+    background: #050505;
     position: relative;
     overflow: hidden;
 }
@@ -42,6 +42,10 @@
     position: relative;
     overflow: hidden;
     background-color: #000;
+    margin: 10px 20px;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    border-radius: 12px;
 }
 
 .scene-3d {
@@ -145,6 +149,59 @@
 }
 
 #dialog-overlay.active { display: block; }
+
+/* Level Info Overlay */
+#level-info-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    z-index: 150;
+    max-width: 300px;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+#level-info-overlay h3 { color: var(--primary-color); margin-bottom: 5px; }
+#level-info-overlay p { font-size: 0.9rem; margin-bottom: 10px; color: #ccc; }
+#level-objective { font-weight: bold; color: white; }
+
+/* Map Display */
+#game-map {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 150px;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid var(--primary-color);
+    z-index: 150;
+    border-radius: 4px;
+}
+
+.map-node {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #444;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.map-node.active {
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.map-connection {
+    position: absolute;
+    background: #222;
+    height: 2px;
+    transform-origin: left center;
+}
 
 /* Settings Menu */
 #settings-menu {

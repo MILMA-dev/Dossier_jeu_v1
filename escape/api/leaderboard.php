@@ -8,6 +8,7 @@ $query = "
     SELECT u.username, l.score, l.time_elapsed
     FROM leaderboard l
     JOIN users u ON l.user_id = u.id
+    WHERE u.role = 'player'
 ";
 
 if ($level_id) {

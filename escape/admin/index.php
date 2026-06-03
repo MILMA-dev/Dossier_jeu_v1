@@ -7,6 +7,11 @@ if (!is_admin()) {
     exit;
 }
 
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$admin = $stmt->fetch();
+
 // Fetch some KPIs
 $userCount = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $gameCount = $pdo->query("SELECT COUNT(*) FROM game_sessions WHERE status = 'completed'")->fetchColumn();
@@ -26,16 +31,22 @@ $avgScore = $pdo->query("SELECT AVG(score) FROM leaderboard")->fetchColumn() ?: 
         .kpi-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
     </style>
 </head>
-<body>
+<body class="dark-theme">
     <div id="app-layout">
         <nav id="sidebar">
             <div id="sidebar-logo"><span class="logo-escape">ADMIN</span></div>
+            <div id="sidebar-user">
+                <span class="user-avatar"><?= h($admin['avatar']) ?></span>
+                <span class="user-name"><?= h($admin['username']) ?></span>
+                <span class="user-points"><?= $admin['total_points'] ?> pts</span>
+            </div>
             <ul id="sidebar-nav">
                 <li class="active"><a href="index.php">🏠 Vue globale</a></li>
                 <li><a href="users.php">👥 Utilisateurs</a></li>
                 <li><a href="stats.php">📊 Stats</a></li>
                 <li><a href="../dashboard.php">🎮 Retour Jeu</a></li>
             </ul>
+            <a href="../logout.php" id="sidebar-logout">🚪 Déconnexion</a>
         </nav>
         <main id="dashboard-content">
             <h1>🛠 Dashboard Administration</h1>
