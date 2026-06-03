@@ -20,6 +20,10 @@
                     "x": 20, "y": 20, "w": 40, "h": 40
                 }
             ]
+    },
+    "puzzles": {
+        "painting": { "type": "jigsaw", "reward_item": { "id": "key_silver", "name": "Clé en argent" } },
+        "piano": { "type": "sequence_memory", "reward_item": { "id": "mansion_key", "name": "Clé du Manoir" } }
         },
         "node_study": {
             "background": "assets/img/level3/study.jpg",
@@ -30,6 +34,11 @@
                     "puzzle_id": "piano",
                     "puzzle_type": "sequence_memory",
                     "x": 60, "y": 60, "w": 20, "h": 20
+                },
+                {
+                    "type": "exit",
+                    "x": 10, "y": 10, "w": 20, "h": 80,
+                    "require_item": "mansion_key"
                 }
             ]
         }

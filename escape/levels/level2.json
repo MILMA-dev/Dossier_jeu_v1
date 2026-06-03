@@ -6,8 +6,14 @@
     "nodes": {
         "node_start": {
             "background": "assets/img/level2/lab_main.jpg",
-            "connections": {"north": "node_server", "east": "node_chem", "south": "node_exit"},
-            "objects": []
+            "connections": {"north": "node_server", "east": "node_chem"},
+            "objects": [
+                {
+                    "type": "exit",
+                    "x": 40, "y": 70, "w": 20, "h": 30,
+                    "require_item": "badge"
+                }
+            ]
         },
         "node_server": {
             "background": "assets/img/level2/lab_server.jpg",
@@ -34,5 +40,9 @@
                 }
             ]
         }
+    },
+    "puzzles": {
+        "wires": { "type": "wire_connect", "reward_item": { "id": "card", "name": "Carte d'accès" } },
+        "symbols": { "type": "pattern_match", "pattern": "A-B-C", "reward_item": { "id": "badge", "name": "Badge Admin" } }
     }
 }

@@ -12,6 +12,10 @@
                     "type": "examine",
                     "dialog": "Erreur système. Réalité instable.",
                     "x": 10, "y": 10, "w": 80, "h": 80
+                },
+                {
+                    "type": "exit",
+                    "x": 45, "y": 90, "w": 10, "h": 10
                 }
             ]
         }
